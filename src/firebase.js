@@ -1,5 +1,5 @@
 // import * as firebase from "firebase/app";
-import { initializeAuth,getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword ,signOut} from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword ,signOut} from "firebase/auth";
 import{ initializeApp } from 'firebase/app'
 import { getFirestore } from 'firebase/firestore'
 
