@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import './SignUpScreen.css';
-import { auth,createUser,signinUser } from "../firebase";
+import { auth,createUser,setPersistence,signinUser } from "../firebase";
+import { browserSessionPersistence } from "firebase/auth";
 
 
 function SignUpScreen() {
@@ -18,10 +19,22 @@ function SignUpScreen() {
   const signIn = (e) => {
     e.preventDefault();
 
-    signinUser(auth,emailRef.current.value,passwordRef.current.value).then((authUser)=>{
-      console.log(authUser);
-    })
-    .catch((error)=>alert(error.message));
+    setPersistence(auth,browserSessionPersistence).then(()=>{
+      return signinUser(auth,emailRef.current.value,passwordRef.current.value).then((authUser)=>{
+        console.log(authUser);
+      })
+      .catch((error)=>alert(error.message));
+    }).catch((error) => {
+      // Handle Errors here.
+      // const errorCode = error.code;
+      // const errorMessage = error.message;
+      console.log(error)
+    });
+
+    // signinUser(auth,emailRef.current.value,passwordRef.current.value).then((authUser)=>{
+    //   console.log(authUser);
+    // })
+    // .catch((error)=>alert(error.message));
   };
 
   return (
